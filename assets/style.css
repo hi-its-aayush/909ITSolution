@@ -252,6 +252,9 @@ ul { list-style: none; }
 .content-image-text p  { color: var(--fg-2); font-size: 15px; line-height: 1.8; margin-bottom: 14px; }
 .content-image-photo {
   position: relative; min-height: 420px; overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--navy-mid);
 }
 .content-image-photo img {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
