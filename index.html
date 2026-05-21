@@ -8,1131 +8,672 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --navy:      #0B1E35;
-    --navy-mid:  #142A47;
-    --blue:      #0078D4;
-    --blue-dark: #005A9E;
-    --blue-pale: #E8F3FC;
-    --fg:        #0B1E35;
-    --fg-2:      #4A5568;
-    --fg-3:      #718096;
-    --bg:        #FFFFFF;
-    --bg-2:      #F7F9FC;
-    --bg-3:      #EEF2F7;
-    --border:    #D9E2EC;
-    --red:       #D32F2F;
-    --green:     #1B7A4A;
-    --radius:    4px;
-    --radius-lg: 8px;
-  }
+/* ── HERO ── */
+.hero {
+  position: relative;
+  background: var(--navy);
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('images/hero-bg.jpg');
+  background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=80');
+  background-size: cover;
+  background-position: center right;
+  opacity: 0.28;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(11,30,53,0.97) 42%, rgba(11,30,53,0.55) 100%);
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 620px;
+  padding: 80px 0;
+}
+.hero-eyebrow {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.hero-eyebrow::before {
+  content: ''; display: block;
+  width: 32px; height: 1.5px;
+  background: var(--blue);
+}
+.hero h1 {
+  font-size: 58px; font-weight: 700;
+  color: #fff; line-height: 1.08;
+  margin-bottom: 24px;
+  letter-spacing: -0.025em;
+}
+.hero h1 em { font-style: normal; color: var(--blue); }
+.hero-sub {
+  font-size: 18px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+.hero-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.hero-stats {
+  display: flex; gap: 40px;
+  margin-top: 56px; padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.hero-stat-num { font-family: 'Outfit', sans-serif; font-size: 30px; font-weight: 700; color: #fff; }
+.hero-stat-lbl { font-size: 13px; color: rgba(255,255,255,0.45); margin-top: 3px; }
 
-  html { scroll-behavior: smooth; }
+/* ── ANNOUNCEMENT BAR ── */
+.announce-bar {
+  background: var(--navy);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 10px 0;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+}
+.announce-bar span { color: var(--blue); font-weight: 500; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--fg);
-    background: var(--bg);
-    -webkit-font-smoothing: antialiased;
-  }
+/* ── PARTNER LOGOS ── */
+.partner-logos-section {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  padding: 28px 0;
+}
+.logos-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.logos-label {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  white-space: nowrap;
+  padding-right: 40px;
+  border-right: 1px solid var(--border);
+  margin-right: 40px;
+}
+.vendor-logos { display: flex; align-items: center; gap: 36px; flex-wrap: wrap; }
+.vendor-logo {
+  display: flex; align-items: center; gap: 8px;
+  opacity: 0.55;
+  transition: opacity 0.2s;
+  cursor: default;
+}
+.vendor-logo:hover { opacity: 1; }
+.vendor-logo img { height: 22px; width: auto; object-fit: contain; }
+.vendor-logo span { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 600; color: var(--fg); }
 
-  h1, h2, h3, h4, h5 {
-    font-family: 'Outfit', sans-serif;
-    line-height: 1.2;
-    color: var(--navy);
-    font-weight: 600;
-  }
+/* ── SPECIALISATIONS STRIP ── */
+.spec-strip {
+  background: var(--navy);
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.spec-strip-item {
+  padding: 32px 40px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  transition: background 0.2s, border-left 0.2s;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+}
+.spec-strip-item:last-child { border-right: none; }
+.spec-strip-item:hover {
+  background: rgba(0,120,212,0.12);
+  border-left-color: var(--blue);
+}
+.spec-strip-item:hover .spec-strip-text h4 { color: #60b4ff; }
+.spec-strip-text h4 { transition: color 0.2s; }
+.spec-strip-icon {
+  width: 44px; height: 44px; flex-shrink: 0;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+}
+.spec-strip-icon img { width: 26px; height: 26px; object-fit: contain; filter: brightness(0) invert(1); }
+.spec-strip-text h4 { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+.spec-strip-text p  { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+.spec-badge-sm {
+  display: inline-block;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--blue);
+  background: rgba(0,120,212,0.15);
+  padding: 2px 8px; border-radius: 20px;
+  margin-top: 8px;
+}
 
-  a { color: inherit; text-decoration: none; }
-  img { display: block; max-width: 100%; }
-  ul { list-style: none; }
+/* ── IMAGE SERVICE TILES ── */
+.services-image-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+.img-tile {
+  position: relative;
+  height: 280px;
+  overflow: hidden;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--navy-mid);
+  transition: background-size 0.5s ease;
+}
+.img-tile:hover { background-size: 106%; }
+.img-tile-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(11,30,53,0.88) 0%, rgba(11,30,53,0.35) 60%, transparent 100%);
+  transition: background 0.3s;
+}
+.img-tile:hover .img-tile-overlay {
+  background: linear-gradient(0deg, rgba(0,90,158,0.88) 0%, rgba(0,90,158,0.4) 60%, rgba(0,90,158,0.15) 100%);
+}
+.img-tile-content {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 24px;
+}
+.img-tile-content h3 {
+  font-size: 17px; font-weight: 600; color: #fff;
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+.img-tile-content p {
+  font-size: 13px; color: rgba(255,255,255,0);
+  line-height: 1.5; margin-top: 8px;
+  transition: color 0.3s;
+}
+.img-tile:hover .img-tile-content p { color: rgba(255,255,255,0.8); }
+.img-tile-arrow {
+  position: absolute;
+  top: 20px; right: 20px;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: rgba(0,120,212,0);
+  border: 1px solid rgba(255,255,255,0);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.25s;
+}
+.img-tile:hover .img-tile-arrow {
+  background: var(--blue);
+  border-color: var(--blue);
+}
+.img-tile-arrow svg { width: 14px; height: 14px; stroke: #fff; stroke-width: 2.5; fill: none; }
+/* Wide tile */
+.img-tile-wide { grid-column: span 2; }
 
-  .container { max-width: 1160px; margin: 0 auto; padding: 0 32px; }
-  .section { padding: 88px 0; }
-  .section-sm { padding: 56px 0; }
+/* ── ABOUT SECTION ── */
+.about-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 540px;
+}
+.about-text {
+  background: var(--bg-2);
+  padding: 88px 72px 88px 0;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.about-img {
+  position: relative;
+  overflow: hidden;
+}
+.about-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.about-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,120,212,0.15), transparent 60%);
+}
+.about-text h2 { font-size: 38px; letter-spacing: -0.02em; margin: 14px 0 20px; }
+.about-text p  { color: var(--fg-2); margin-bottom: 16px; font-size: 16px; line-height: 1.8; }
+.about-quote {
+  margin-top: 28px;
+  padding: 20px 24px;
+  border-left: 3px solid var(--blue);
+  background: var(--bg);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+}
+.about-quote p { font-size: 15px; font-style: italic; color: var(--navy); margin: 0; font-weight: 500; }
 
-  .label {
-    font-family: 'Outfit', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--blue);
-  }
+/* ── MICROSOFT LOGOS SECTION ── */
+.ms-products {
+  background: var(--bg);
+  padding: 56px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.ms-products-inner {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.ms-products-label {
+  min-width: 220px;
+  padding-right: 48px;
+  border-right: 1px solid var(--border);
+}
+.ms-products-label .label { display: block; margin-bottom: 6px; }
+.ms-products-label p { font-size: 13px; color: var(--fg-2); line-height: 1.5; }
+.ms-product-logos {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding-left: 48px;
+  flex-wrap: wrap;
+}
+.ms-product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.7;
+  transition: opacity 0.2s, transform 0.2s;
+  cursor: default;
+}
+.ms-product:hover { opacity: 1; transform: translateY(-2px); }
+.ms-product img { width: 36px; height: 36px; object-fit: contain; }
+.ms-product span { font-size: 11px; font-weight: 600; color: var(--fg-2); text-align: center; white-space: nowrap; font-family: 'Outfit', sans-serif; letter-spacing: 0.04em; }
 
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 13px 28px;
-    border-radius: var(--radius);
-    font-family: 'Outfit', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    border: none;
-    transition: all 0.18s ease;
-  }
-  .btn-primary {
-    background: var(--blue);
-    color: #fff;
-  }
-  .btn-primary:hover { background: var(--blue-dark); }
-  .btn-outline {
-    background: transparent;
-    color: var(--navy);
-    border: 1.5px solid var(--navy);
-  }
-  .btn-outline:hover { background: var(--navy); color: #fff; }
-  .btn-white {
-    background: #fff;
-    color: var(--navy);
-  }
-  .btn-white:hover { background: var(--bg-2); }
-  .btn-ghost {
-    background: transparent;
-    color: var(--blue);
-    padding: 0;
-    gap: 6px;
-    font-size: 14px;
-    font-weight: 500;
-  }
-  .btn-ghost:hover { gap: 10px; }
+/* ── WHY US ── */
+.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.why-left h2 { font-size: 36px; letter-spacing: -0.02em; margin-top: 14px; margin-bottom: 20px; }
+.why-left > p  { color: var(--fg-2); margin-bottom: 28px; }
+.pillars { display: flex; flex-direction: column; gap: 0; margin-top: 28px; }
+.pillar { display: flex; gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--border); }
+.pillar:first-child { padding-top: 0; }
+.pillar-num { font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 700; color: var(--blue); padding-top: 2px; min-width: 24px; }
+.pillar h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.pillar p  { font-size: 14px; color: var(--fg-2); line-height: 1.6; }
+.why-panel { background: var(--navy); border-radius: var(--radius-lg); padding: 48px; overflow: hidden; position: relative; }
+.why-panel::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 240px; height: 240px;
+  border-radius: 50%;
+  background: rgba(0,120,212,0.08);
+}
+.stats-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.stat-box .stat-num  { font-family: 'Outfit', sans-serif; font-size: 38px; font-weight: 700; color: #fff; line-height: 1; }
+.stat-box .stat-desc { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 6px; line-height: 1.5; }
+.stat-divider { grid-column: 1/-1; height: 1px; background: rgba(255,255,255,0.1); }
+.why-quote { margin-top: 32px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.1); }
+.why-quote p { font-size: 15px; font-style: italic; color: rgba(255,255,255,0.7); line-height: 1.7; }
+.why-quote cite { display: block; margin-top: 10px; font-size: 11px; font-style: normal; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.08em; }
 
-  .arrow {
-    display: inline-block;
-    transition: transform 0.18s ease;
-  }
-  .btn-ghost:hover .arrow { transform: translateX(3px); }
-
-  /* ─── NAV ─── */
-  nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(255,255,255,0.97);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .nav-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 68px;
-  }
-
-  .nav-logo {
-    font-family: 'Outfit', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--navy);
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .nav-logo span { color: var(--blue); }
-
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-  }
-  .nav-links a {
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--fg-2);
-    transition: color 0.15s;
-  }
-  .nav-links a:hover { color: var(--navy); }
-
-  .nav-actions { display: flex; align-items: center; gap: 12px; }
-
-  .nav-phone {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--fg-2);
-  }
-
-  /* ─── HERO ─── */
-  .hero {
-    background: var(--navy);
-    padding: 96px 0 80px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: 0; right: 0;
-    width: 52%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(0,120,212,0.12) 0%, rgba(0,120,212,0.03) 100%);
-    border-left: 1px solid rgba(0,120,212,0.15);
-  }
-
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 64px;
-    align-items: center;
-  }
-
-  .hero-eyebrow {
-    font-family: 'Outfit', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--blue);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .hero-eyebrow::before {
-    content: '';
-    display: block;
-    width: 28px;
-    height: 1.5px;
-    background: var(--blue);
-  }
-
-  .hero h1 {
-    font-size: 52px;
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.1;
-    margin-bottom: 24px;
-    letter-spacing: -0.02em;
-  }
-
-  .hero h1 em {
-    font-style: normal;
-    color: var(--blue);
-  }
-
-  .hero-sub {
-    font-size: 17px;
-    color: rgba(255,255,255,0.68);
-    line-height: 1.7;
-    margin-bottom: 36px;
-    max-width: 440px;
-  }
-
-  .hero-actions { display: flex; gap: 14px; align-items: center; }
-
-  .hero-stats {
-    display: flex;
-    gap: 36px;
-    margin-top: 48px;
-    padding-top: 36px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-  }
-
-  .hero-stat-num {
-    font-family: 'Outfit', sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: #fff;
-  }
-  .hero-stat-label {
-    font-size: 13px;
-    color: rgba(255,255,255,0.5);
-    margin-top: 2px;
-  }
-
-  .hero-right {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .spec-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: var(--radius-lg);
-    padding: 24px 28px;
-    transition: border-color 0.2s, background 0.2s;
-    cursor: default;
-  }
-  .spec-card:hover {
-    background: rgba(0,120,212,0.08);
-    border-color: rgba(0,120,212,0.35);
-  }
-
-  .spec-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius);
-    background: var(--blue);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 14px;
-  }
-  .spec-icon svg { width: 20px; height: 20px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-
-  .spec-card h3 {
-    font-size: 16px;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 6px;
-  }
-  .spec-card p {
-    font-size: 13px;
-    color: rgba(255,255,255,0.55);
-    line-height: 1.6;
-  }
-
-  .spec-badge {
-    display: inline-block;
-    margin-top: 12px;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--blue);
-    background: rgba(0,120,212,0.15);
-    padding: 3px 10px;
-    border-radius: 20px;
-  }
-
-  /* ─── PARTNERS ─── */
-  .partners {
-    border-bottom: 1px solid var(--border);
-    padding: 32px 0;
-    background: var(--bg-2);
-  }
-  .partners-inner {
-    display: flex;
-    align-items: center;
-    gap: 48px;
-    flex-wrap: wrap;
-  }
-  .partners-label {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--fg-3);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    white-space: nowrap;
-    padding-right: 16px;
-    border-right: 1px solid var(--border);
-  }
-  .partner-logos {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    flex-wrap: wrap;
-  }
-  .partner-name {
-    font-family: 'Outfit', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--fg-3);
-    letter-spacing: 0.02em;
-    transition: color 0.15s;
-  }
-  .partner-name:hover { color: var(--fg); }
-
-  /* ─── SERVICES ─── */
-  .services-header {
-    max-width: 600px;
-    margin-bottom: 56px;
-  }
-  .services-header h2 {
-    font-size: 38px;
-    margin-top: 14px;
-    margin-bottom: 16px;
-    letter-spacing: -0.02em;
-  }
-  .services-header p { color: var(--fg-2); font-size: 16px; }
-
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-  }
-
-  .service-tile {
-    background: var(--bg);
-    padding: 36px 32px;
-    transition: background 0.18s;
-    cursor: pointer;
-    position: relative;
-  }
-  .service-tile:hover { background: var(--bg-2); }
-  .service-tile:hover .tile-arrow { opacity: 1; transform: translateX(0); }
-
-  .tile-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: var(--radius);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 18px;
-  }
-  .tile-icon svg { width: 22px; height: 22px; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-
-  .tile-icon.blue { background: var(--blue-pale); }
-  .tile-icon.blue svg { stroke: var(--blue); }
-  .tile-icon.navy { background: #E8ECF2; }
-  .tile-icon.navy svg { stroke: var(--navy); }
-  .tile-icon.green { background: #E6F4EC; }
-  .tile-icon.green svg { stroke: var(--green); }
-  .tile-icon.red { background: #FCEBEB; }
-  .tile-icon.red svg { stroke: var(--red); }
-
-  .service-tile h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
-  .service-tile p { font-size: 14px; color: var(--fg-2); line-height: 1.6; }
-
-  .tile-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 16px;
-  }
-  .tile-tag {
-    font-size: 11px;
-    font-weight: 500;
-    padding: 3px 9px;
-    border-radius: 20px;
-    background: var(--bg-3);
-    color: var(--fg-2);
-  }
-
-  .tile-arrow {
-    position: absolute;
-    bottom: 28px;
-    right: 28px;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: var(--blue);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transform: translateX(-6px);
-    transition: opacity 0.18s, transform 0.18s;
-  }
-  .tile-arrow svg { width: 14px; height: 14px; stroke: #fff; stroke-width: 2; fill: none; }
-
-  /* ─── WHY US ─── */
-  .why { background: var(--bg-2); }
-
-  .why-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-  }
-
-  .why-left h2 {
-    font-size: 38px;
-    letter-spacing: -0.02em;
-    margin-top: 14px;
-    margin-bottom: 20px;
-  }
-  .why-left p { color: var(--fg-2); margin-bottom: 32px; }
-
-  .pillars { display: flex; flex-direction: column; gap: 0; }
-  .pillar {
-    display: flex;
-    gap: 20px;
-    padding: 24px 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .pillar:first-child { padding-top: 0; }
-  .pillar-num {
-    font-family: 'Outfit', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--blue);
-    padding-top: 3px;
-    min-width: 24px;
-  }
-  .pillar h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
-  .pillar p { font-size: 14px; color: var(--fg-2); line-height: 1.6; }
-
-  .why-right {
-    background: var(--navy);
-    border-radius: var(--radius-lg);
-    padding: 48px;
-    color: #fff;
-  }
-  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
-  .stat-item { }
-  .stat-num {
-    font-family: 'Outfit', sans-serif;
-    font-size: 40px;
-    font-weight: 700;
-    color: #fff;
-    line-height: 1;
-  }
-  .stat-desc {
-    font-size: 13px;
-    color: rgba(255,255,255,0.55);
-    margin-top: 6px;
-    line-height: 1.5;
-  }
-  .stat-divider {
-    grid-column: 1 / -1;
-    height: 1px;
-    background: rgba(255,255,255,0.1);
-  }
-
-  .why-quote {
-    margin-top: 36px;
-    padding-top: 28px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-  }
-  .why-quote p {
-    font-size: 15px;
-    font-style: italic;
-    color: rgba(255,255,255,0.7);
-    line-height: 1.7;
-  }
-  .why-quote cite {
-    display: block;
-    margin-top: 12px;
-    font-size: 12px;
-    font-style: normal;
-    color: rgba(255,255,255,0.4);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  /* ─── SPECIALISATIONS DEEP DIVE ─── */
-  .specs-deep { background: var(--bg); }
-
-  .specs-deep h2 {
-    font-size: 38px;
-    letter-spacing: -0.02em;
-    margin-top: 14px;
-    margin-bottom: 14px;
-  }
-  .specs-deep > .container > p {
-    color: var(--fg-2);
-    margin-bottom: 56px;
-    max-width: 560px;
-  }
-
-  .specs-tabs { display: flex; gap: 0; border-bottom: 2px solid var(--border); margin-bottom: 48px; }
-  .spec-tab {
-    padding: 14px 24px;
-    font-family: 'Outfit', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--fg-2);
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -2px;
-    transition: color 0.15s, border-color 0.15s;
-  }
-  .spec-tab.active { color: var(--blue); border-color: var(--blue); }
-
-  .spec-panel { display: none; }
-  .spec-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
-
-  .spec-panel-left h3 { font-size: 26px; margin-bottom: 14px; letter-spacing: -0.01em; }
-  .spec-panel-left p { font-size: 15px; color: var(--fg-2); margin-bottom: 28px; line-height: 1.7; }
-
-  .spec-services-list { display: flex; flex-direction: column; gap: 0; }
-  .spec-service-item {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 14px;
-    color: var(--fg);
-  }
-  .spec-service-item:last-child { border-bottom: none; }
-  .spec-service-item::before {
-    content: '';
-    display: block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--blue);
-    flex-shrink: 0;
-  }
-
-  .spec-panel-right {
-    background: var(--bg-2);
-    border-radius: var(--radius-lg);
-    padding: 36px;
-    border: 1px solid var(--border);
-  }
-  .spec-panel-right h4 { font-size: 15px; margin-bottom: 20px; color: var(--fg-2); font-weight: 500; }
-  .benefit-list { display: flex; flex-direction: column; gap: 16px; }
-  .benefit-item { display: flex; gap: 14px; align-items: flex-start; }
-  .benefit-icon {
-    width: 32px;
-    height: 32px;
-    border-radius: var(--radius);
-    background: var(--blue-pale);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .benefit-icon svg { width: 16px; height: 16px; stroke: var(--blue); stroke-width: 2; fill: none; }
-  .benefit-item p { font-size: 14px; color: var(--fg-2); line-height: 1.5; }
-  .benefit-item strong { color: var(--fg); font-weight: 500; display: block; margin-bottom: 2px; }
-
-  /* ─── CTA ─── */
-  .cta-band {
-    background: var(--blue);
-    padding: 72px 0;
-  }
-  .cta-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-  }
-  .cta-band h2 {
-    font-size: 34px;
-    color: #fff;
-    letter-spacing: -0.02em;
-    max-width: 520px;
-  }
-  .cta-band p { color: rgba(255,255,255,0.72); margin-top: 10px; font-size: 16px; }
-  .cta-actions { display: flex; gap: 12px; flex-shrink: 0; }
-
-  /* ─── FOOTER ─── */
-  footer {
-    background: var(--navy);
-    padding: 64px 0 32px;
-    color: rgba(255,255,255,0.6);
-    font-size: 14px;
-  }
-
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 48px;
-    padding-bottom: 48px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    margin-bottom: 32px;
-  }
-
-  .footer-brand .nav-logo { margin-bottom: 14px; }
-  .footer-brand p { color: rgba(255,255,255,0.5); font-size: 14px; line-height: 1.7; max-width: 260px; }
-
-  .footer-contact {
-    margin-top: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .footer-contact a {
-    font-size: 14px;
-    color: rgba(255,255,255,0.5);
-    transition: color 0.15s;
-  }
-  .footer-contact a:hover { color: #fff; }
-
-  .footer-col h5 {
-    font-family: 'Outfit', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
-    margin-bottom: 18px;
-  }
-  .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
-  .footer-col a {
-    color: rgba(255,255,255,0.55);
-    font-size: 14px;
-    transition: color 0.15s;
-  }
-  .footer-col a:hover { color: #fff; }
-
-  .footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 24px;
-  }
-  .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.3); }
-  .footer-badges { display: flex; gap: 12px; align-items: center; }
-  .footer-badge {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
-    border: 1px solid rgba(255,255,255,0.15);
-    padding: 4px 10px;
-    border-radius: 3px;
-  }
-
-  /* ─── ANIMATIONS ─── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .fade-up { opacity: 0; animation: fadeUp 0.6s ease forwards; }
-  .fade-up:nth-child(2) { animation-delay: 0.1s; }
-  .fade-up:nth-child(3) { animation-delay: 0.2s; }
-  .fade-up:nth-child(4) { animation-delay: 0.3s; }
-
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 900px) {
-    .hero-grid { grid-template-columns: 1fr; }
-    .hero-right { display: none; }
-    .hero h1 { font-size: 38px; }
-    .services-grid { grid-template-columns: 1fr 1fr; }
-    .why-grid { grid-template-columns: 1fr; }
-    .specs-tabs { overflow-x: auto; }
-    .spec-panel.active { grid-template-columns: 1fr; }
-    .footer-grid { grid-template-columns: 1fr 1fr; }
-    .cta-inner { flex-direction: column; align-items: flex-start; }
-  }
-
-  @media (max-width: 600px) {
-    .container { padding: 0 20px; }
-    .section { padding: 56px 0; }
-    .hero { padding: 60px 0; }
-    .hero h1 { font-size: 30px; }
-    .services-grid { grid-template-columns: 1fr; }
-    .hero-stats { gap: 24px; }
-    .footer-grid { grid-template-columns: 1fr; }
-    .nav-links { display: none; }
-    .stats-grid { grid-template-columns: 1fr; }
-    .cta-actions { flex-direction: column; width: 100%; }
-  }
+@media (max-width: 1000px) {
+  .services-image-grid { grid-template-columns: repeat(2, 1fr); }
+  .img-tile-wide { grid-column: span 1; }
+  .spec-strip { grid-template-columns: 1fr; }
+}
+@media (max-width: 860px) {
+  .hero h1 { font-size: 38px; }
+  .about-section { grid-template-columns: 1fr; }
+  .about-img { height: 280px; }
+  .about-text { padding: 56px 32px; }
+  .why-grid { grid-template-columns: 1fr; }
+  .ms-products-inner { flex-direction: column; align-items: flex-start; }
+  .ms-products-label { border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 24px; padding-right: 0; margin-bottom: 24px; }
+  .ms-product-logos { padding-left: 0; }
+}
+@media (max-width: 600px) {
+  .hero h1 { font-size: 30px; }
+  .hero-stats { gap: 20px; flex-wrap: wrap; }
+  .services-image-grid { grid-template-columns: 1fr 1fr; }
+  .img-tile { height: 200px; }
+  .logos-row { gap: 16px; }
+  .logos-label { border-right: none; border-bottom: 1px solid var(--border); margin-right: 0; margin-bottom: 16px; padding-right: 0; padding-bottom: 12px; width: 100%; }
+  .stats-grid-2 { grid-template-columns: 1fr; }
+}
 </style>
 </head>
-<body>
+<body data-page="home" data-depth="0">
 
-<!-- ─── NAV ─── -->
-<nav>
-  <div class="container">
-    <div class="nav-inner">
-      <a href="#" class="nav-logo">909<span>IT</span></a>
-      <ul class="nav-links">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#specialisations">Specialisations</a></li>
-        <li><a href="#why-us">About Us</a></li>
-        <li><a href="#contact">Blog</a></li>
-      </ul>
-      <div class="nav-actions">
-        <a href="tel:0291457230" class="nav-phone">02 9145 7230</a>
-        <a href="#contact" class="btn btn-primary">Get in Touch</a>
-      </div>
-    </div>
-  </div>
-</nav>
+<!-- ─── ANNOUNCEMENT BAR ─── -->
+<div class="announce-bar">
+  <span>Core Specialisation:</span> Microsoft Stack · AI Automation · FortiGate Firewall &nbsp;—&nbsp; Sydney &amp; Canberra
+</div>
+
+<!-- Nav injected by nav.js -->
 
 <!-- ─── HERO ─── -->
 <section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
   <div class="container">
-    <div class="hero-grid">
-      <div>
-        <p class="hero-eyebrow fade-up">Microsoft Gold Partner · Sydney & Canberra</p>
-        <h1 class="fade-up">Your <em>Microsoft &amp; AI</em> Technology Partner</h1>
-        <p class="hero-sub fade-up">909 IT Solutions helps Australian businesses simplify IT complexity, accelerate automation, and secure their infrastructure — with deep expertise in Microsoft, AI, and Fortinet.</p>
-        <div class="hero-actions fade-up">
-          <a href="#contact" class="btn btn-primary">Free Consultation →</a>
-          <a href="#services" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,0.3);">Our Services</a>
-        </div>
-        <div class="hero-stats">
-          <div>
-            <div class="hero-stat-num">10+</div>
-            <div class="hero-stat-label">Years delivering IT</div>
-          </div>
-          <div>
-            <div class="hero-stat-num">200+</div>
-            <div class="hero-stat-label">Businesses supported</div>
-          </div>
-          <div>
-            <div class="hero-stat-num">2</div>
-            <div class="hero-stat-label">Offices — SYD & CBR</div>
-          </div>
-        </div>
+    <div class="hero-content">
+      <p class="hero-eyebrow fade-up">Microsoft Gold Partner · Sydney &amp; Canberra</p>
+      <h1 class="fade-up">Your Digital <em>Transformation</em> Partner</h1>
+      <p class="hero-sub fade-up">Future-ready digital solutions that enhance productivity, security, and business continuity — built on Microsoft, AI, and Fortinet.</p>
+      <div class="hero-actions fade-up delay-1">
+        <a href="contact-us.html" class="btn btn-primary" style="padding:15px 32px; font-size:15px;">Free Consultation →</a>
+        <a href="#services" class="btn" style="color:rgba(255,255,255,0.7); background:transparent; border:1.5px solid rgba(255,255,255,0.25); font-size:15px;">Our Services</a>
       </div>
-      <div class="hero-right">
-        <!-- Specialisation cards -->
-        <div class="spec-card">
-          <div class="spec-icon">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>
-          </div>
-          <h3>Microsoft Stack</h3>
-          <p>Azure, Microsoft 365, Intune, Teams, Dynamics 365, Power Platform — end-to-end delivery from a certified team.</p>
-          <span class="spec-badge">Core Specialisation</span>
+      <div class="hero-stats fade-up delay-2">
+        <div>
+          <div class="hero-stat-num">10+</div>
+          <div class="hero-stat-lbl">Years delivering IT</div>
         </div>
-        <div class="spec-card">
-          <div class="spec-icon">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5.2 5.2l2.1 2.1M16.7 16.7l2.1 2.1M5.2 18.8l2.1-2.1M16.7 7.3l2.1-2.1"/></svg>
-          </div>
-          <h3>AI Automation</h3>
-          <p>Power Automate, RPA, Copilot integration, and custom AI workflows that eliminate manual effort and unlock growth.</p>
-          <span class="spec-badge">New Capability</span>
+        <div>
+          <div class="hero-stat-num">200+</div>
+          <div class="hero-stat-lbl">Businesses supported</div>
         </div>
-        <div class="spec-card">
-          <div class="spec-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <h3>FortiGate Firewall</h3>
-          <p>Enterprise-grade Fortinet network security — FortiGate deployment, SD-WAN, and ongoing managed security.</p>
-          <span class="spec-badge">Security Expertise</span>
+        <div>
+          <div class="hero-stat-num">99.9%</div>
+          <div class="hero-stat-lbl">Uptime SLA</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">2</div>
+          <div class="hero-stat-lbl">Offices — SYD &amp; CBR</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── PARTNERS ─── -->
-<div class="partners">
+<!-- ─── SPECIALISATIONS STRIP ─── -->
+<div class="spec-strip">
+  <div class="spec-strip-item">
+    <div class="spec-strip-icon" style="background:rgba(0,120,212,0.2);">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft">
+    </div>
+    <div class="spec-strip-text">
+      <h4>Microsoft Stack</h4>
+      <p>Azure · M365 · Intune · Teams · Dynamics 365 · Power Platform</p>
+      <span class="spec-badge-sm">Core Specialisation</span>
+    </div>
+  </div>
+  <div class="spec-strip-item">
+    <div class="spec-strip-icon" style="background:rgba(0,120,212,0.2);">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+    </div>
+    <div class="spec-strip-text">
+      <h4>AI Automation</h4>
+      <p>Power Automate · QuickRPA · Copilot · AI Builder · Desktop Flows</p>
+      <span class="spec-badge-sm">New Capability</span>
+    </div>
+  </div>
+  <div class="spec-strip-item">
+    <div class="spec-strip-icon" style="background:rgba(211,47,47,0.2);">
+      <svg viewBox="0 0 80 22" style="width:60px;height:18px;"><text x="0" y="16" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="white">Fortinet</text></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;display:none;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <div class="spec-strip-text">
+      <h4>FortiGate Security</h4>
+      <p>Firewall · SD-WAN · ZTNA · Managed Fortinet · Network Security</p>
+      <span class="spec-badge-sm">Security Expertise</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── PARTNER LOGOS ─── -->
+<div class="partner-logos-section">
   <div class="container">
-    <div class="partners-inner">
-      <span class="partners-label">Technology Partners</span>
-      <div class="partner-logos">
-        <span class="partner-name">Microsoft</span>
-        <span class="partner-name">Azure</span>
-        <span class="partner-name">Fortinet</span>
-        <span class="partner-name">Veeam</span>
-        <span class="partner-name">Trend Micro</span>
-        <span class="partner-name">Cisco Meraki</span>
-        <span class="partner-name">AWS</span>
+    <div class="logos-row">
+      <span class="logos-label">Technology Partners</span>
+      <div class="vendor-logos">
+        <div class="vendor-logo">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft">
+          <span>Microsoft</span>
+        </div>
+        <div class="vendor-logo">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg" alt="Azure">
+          <span>Azure</span>
+        </div>
+        <div class="vendor-logo">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS">
+          <span>AWS</span>
+        </div>
+        <div class="vendor-logo">
+          <svg viewBox="0 0 80 22" style="width:70px;height:20px;"><rect width="80" height="22" rx="3" fill="#EE3124"/><text x="8" y="16" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="white">Fortinet</text></svg>
+          <span>Fortinet</span>
+        </div>
+        <div class="vendor-logo">
+          <svg viewBox="0 0 60 22" style="width:55px;height:20px;"><text x="0" y="16" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="#00B336">Veeam</text></svg>
+          <span>Veeam</span>
+        </div>
+        <div class="vendor-logo">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Cisco_logo_blue_2016.svg" alt="Cisco Meraki">
+          <span>Cisco Meraki</span>
+        </div>
+        <div class="vendor-logo">
+          <svg viewBox="0 0 100 22" style="width:90px;height:20px;"><text x="0" y="16" font-family="Arial,sans-serif" font-size="13" font-weight="bold" fill="#D71920">Trend Micro</text></svg>
+          <span>Trend Micro</span>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ─── SERVICES ─── -->
-<section class="section" id="services">
-  <div class="container">
-    <div class="services-header">
-      <p class="label">What We Do</p>
-      <h2>Complete IT Services for Australian Business</h2>
-      <p>Whether you need day-to-day managed IT, a cloud migration, or enterprise security — we deliver it with certified engineers and a local presence.</p>
-    </div>
-    <div class="services-grid">
+<!-- ─── SERVICES IMAGE GRID ─── -->
+<section id="services">
+  <div class="services-image-grid">
 
-      <div class="spec-tile service-tile">
-        <div class="tile-icon blue">
-          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></svg>
-        </div>
-        <h3>Microsoft 365 &amp; Modern Workplace</h3>
-        <p>Full M365 deployment, Intune device management, Teams Calling, and ongoing administration for your entire organisation.</p>
-        <div class="tile-tags">
-          <span class="tile-tag">M365 Business</span>
-          <span class="tile-tag">Intune</span>
-          <span class="tile-tag">Teams</span>
-          <span class="tile-tag">SharePoint</span>
-        </div>
-        <div class="tile-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-      </div>
-
-      <div class="service-tile">
-        <div class="tile-icon blue">
-          <svg viewBox="0 0 24 24"><path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
-        </div>
-        <h3>Azure Cloud Infrastructure</h3>
-        <p>Azure cloud migration, hybrid environments, Azure Site Recovery, and full DevOps pipeline setup by certified Azure consultants.</p>
-        <div class="tile-tags">
-          <span class="tile-tag">Azure Migrate</span>
-          <span class="tile-tag">Azure DevOps</span>
-          <span class="tile-tag">Hybrid Cloud</span>
-        </div>
-        <div class="tile-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-      </div>
-
-      <div class="service-tile">
-        <div class="tile-icon blue">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5.2 5.2l2.1 2.1M16.7 16.7l2.1 2.1M5.2 18.8l2.1-2.1M16.7 7.3l2.1-2.1"/></svg>
-        </div>
-        <h3>AI Automation &amp; RPA</h3>
-        <p>Intelligent workflows with Power Automate, QuickRPA, and Microsoft Copilot to automate repetitive tasks and boost productivity.</p>
-        <div class="tile-tags">
-          <span class="tile-tag">Power Automate</span>
-          <span class="tile-tag">Copilot</span>
-          <span class="tile-tag">QuickRPA</span>
-        </div>
-        <div class="tile-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-      </div>
-
-      <div class="service-tile">
-        <div class="tile-icon red">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <h3>FortiGate &amp; Network Security</h3>
-        <p>FortiGate firewall deployment and management, SD-WAN, Fortinet Secure SD-WAN, and comprehensive network security assessments.</p>
-        <div class="tile-tags">
-          <span class="tile-tag">FortiGate</span>
-          <span class="tile-tag">SD-WAN</span>
-          <span class="tile-tag">Firewall</span>
-        </div>
-        <div class="tile-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-      </div>
-
-      <div class="service-tile">
-        <div class="tile-icon green">
-          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        </div>
+    <a href="managed-it-services.html" class="img-tile img-tile-wide" style="background-image:url('https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1000&q=80&fit=crop')">
+      <div class="img-tile-overlay"></div>
+      <div class="img-tile-content">
         <h3>Managed IT Services</h3>
-        <p>Fully managed service desk, proactive monitoring, and end-to-end IT support as your dedicated technology partner.</p>
-        <div class="tile-tags">
-          <span class="tile-tag">Service Desk</span>
-          <span class="tile-tag">24/7 Support</span>
-          <span class="tile-tag">Small Business</span>
-        </div>
-        <div class="tile-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        <p>24/7 service desk, proactive monitoring, and end-to-end IT management as your dedicated technology partner.</p>
       </div>
+      <div class="img-tile-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
 
-      <div class="service-tile">
-        <div class="tile-icon navy">
-          <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
-        </div>
+    <a href="modern-workplace/microsoft-365-business.html" class="img-tile" style="background-image:url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=700&q=80&fit=crop')">
+      <div class="img-tile-overlay"></div>
+      <div class="img-tile-content">
+        <h3>Microsoft 365 Business</h3>
+        <p>Full M365 deployment, Intune, Teams Calling and ongoing administration.</p>
+      </div>
+      <div class="img-tile-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
+
+    <a href="microsoft-azure-aws/azure-cloud-infrastructure.html" class="img-tile" style="background-image:url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=700&q=80&fit=crop')">
+      <div class="img-tile-overlay"></div>
+      <div class="img-tile-content">
+        <h3>Azure Cloud Infrastructure</h3>
+        <p>Migration, hybrid environments, Site Recovery and full DevOps pipelines.</p>
+      </div>
+      <div class="img-tile-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
+
+    <a href="infrastructure-hybrid/fortinet-secure-sd-wan.html" class="img-tile" style="background-image:url('https://images.unsplash.com/photo-1563986768609-322da13575f3?w=700&q=80&fit=crop')">
+      <div class="img-tile-overlay"></div>
+      <div class="img-tile-content">
+        <h3>FortiGate &amp; Network Security</h3>
+        <p>Enterprise firewall deployment, SD-WAN and managed Fortinet security.</p>
+      </div>
+      <div class="img-tile-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
+
+    <a href="d365-power-platform/power-automate.html" class="img-tile" style="background-image:url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=700&q=80&fit=crop')">
+      <div class="img-tile-overlay"></div>
+      <div class="img-tile-content">
+        <h3>AI Automation &amp; RPA</h3>
+        <p>Power Automate, QuickRPA and Copilot to eliminate manual work.</p>
+      </div>
+      <div class="img-tile-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
+
+    <a href="d365-power-platform/dynamics-365.html" class="img-tile" style="background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&q=80&fit=crop')">
+      <div class="img-tile-overlay"></div>
+      <div class="img-tile-content">
         <h3>Dynamics 365 &amp; Power Platform</h3>
-        <p>D365 implementation, Power Apps, Power BI, and Power Virtual Agents to unify operations and surface business intelligence.</p>
-        <div class="tile-tags">
-          <span class="tile-tag">Dynamics 365</span>
-          <span class="tile-tag">Power BI</span>
-          <span class="tile-tag">Power Apps</span>
-        </div>
-        <div class="tile-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        <p>D365 implementation, Power Apps, Power BI and Power Virtual Agents.</p>
       </div>
+      <div class="img-tile-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
 
-      <div class="service-tile">
-        <div class="tile-icon navy">
-          <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-        </div>
+    <a href="cyber-security/index.html" class="img-tile" style="background-image:url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=700&q=80&fit=crop')">
+      <div class="img-tile-overlay"></div>
+      <div class="img-tile-content">
         <h3>Cyber Security</h3>
-        <p>Cloud, network, and endpoint security with risk assessments, Microsoft Sentinel, and proactive managed security services.</p>
-        <div class="tile-tags">
-          <span class="tile-tag">Sentinel</span>
-          <span class="tile-tag">Endpoint</span>
-          <span class="tile-tag">Risk Assessment</span>
-        </div>
-        <div class="tile-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        <p>Cloud, network and endpoint security with Microsoft Sentinel SIEM.</p>
       </div>
+      <div class="img-tile-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
 
-      <div class="service-tile">
-        <div class="tile-icon green">
-          <svg viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-        </div>
+    <a href="medical-it-support/index.html" class="img-tile" style="background-image:url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=700&q=80&fit=crop')">
+      <div class="img-tile-overlay"></div>
+      <div class="img-tile-content">
         <h3>Medical IT Support</h3>
-        <p>Specialist IT support for healthcare practices — medical-grade security, compliance, private practice setup, and infrastructure.</p>
-        <div class="tile-tags">
-          <span class="tile-tag">Healthcare</span>
-          <span class="tile-tag">Private Practice</span>
-          <span class="tile-tag">Compliance</span>
-        </div>
-        <div class="tile-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        <p>Specialist IT for healthcare — secure, compliant and clinical-aware.</p>
       </div>
+      <div class="img-tile-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
 
-      <div class="service-tile">
-        <div class="tile-icon navy">
-          <svg viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        </div>
-        <h3>Professional Services &amp; CIO Advisory</h3>
-        <p>IT strategy, road mapping, CIO-as-a-Service, and project delivery for organisations that need senior-level technology leadership.</p>
-        <div class="tile-tags">
-          <span class="tile-tag">IT Strategy</span>
-          <span class="tile-tag">CIO-as-a-Service</span>
-          <span class="tile-tag">Road Mapping</span>
-        </div>
-        <div class="tile-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    <a href="professional-services/cio-as-a-service.html" class="img-tile" style="background-image:url('https://images.unsplash.com/photo-1553877522-43269d4ea984?w=700&q=80&fit=crop')">
+      <div class="img-tile-overlay"></div>
+      <div class="img-tile-content">
+        <h3>IT Consulting &amp; CIO Advisory</h3>
+        <p>Strategy, roadmapping and CIO-as-a-Service for senior technology leadership.</p>
       </div>
+      <div class="img-tile-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
 
-    </div>
   </div>
 </section>
 
-<!-- ─── SPECIALISATIONS DEEP DIVE ─── -->
-<section class="section specs-deep" id="specialisations" style="background:var(--bg-2);">
+<!-- ─── ABOUT / INTRO ─── -->
+<section class="about-section">
+  <div class="about-text" style="padding-left:calc((100vw - 1160px) / 2 + 32px);">
+    <p class="label">Who We Are</p>
+    <h2>Simplify your IT complexity with better experience</h2>
+    <p>We are the team of certified engineers based in Sydney &amp; Canberra, delivering comprehensive and effective IT services as your trusted Managed Service Provider.</p>
+    <p>909IT Solution is a leading Information Technology company providing tailored services in Software Development, Telecommunication, and Cloud Solutions — with a professional approach that guarantees the best results for every client.</p>
+    <div class="about-quote">
+      <p>"We grow alongside our clients by understanding their needs and requirements."</p>
+    </div>
+    <a href="about-us.html" class="btn btn-primary" style="margin-top:32px; align-self:flex-start;">About 909 IT →</a>
+  </div>
+  <div class="about-img">
+    <img src="images/about-team.jpg"
+         onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&q=80'"
+         alt="909 IT Solutions team">
+    <div class="about-img-overlay"></div>
+  </div>
+</section>
+
+<!-- ─── MICROSOFT PRODUCTS STRIP ─── -->
+<div class="ms-products">
   <div class="container">
-    <p class="label">Core Specialisations</p>
-    <h2>Where We Go Deep</h2>
-    <p>Beyond general managed IT, these are the three areas where 909 IT invests most deeply in certification, tooling, and capability.</p>
-
-    <div class="specs-tabs">
-      <div class="spec-tab active" onclick="switchTab(0)">Microsoft Stack</div>
-      <div class="spec-tab" onclick="switchTab(1)">AI Automation</div>
-      <div class="spec-tab" onclick="switchTab(2)">FortiGate Security</div>
-    </div>
-
-    <!-- Panel 0: Microsoft -->
-    <div class="spec-panel active" id="panel-0">
-      <div class="spec-panel-left">
-        <h3>End-to-End Microsoft Delivery</h3>
-        <p>We hold deep Microsoft certifications across the full stack — from M365 and Azure through to Dynamics 365 and Power Platform. For businesses standardising on Microsoft, we are the single partner that can deliver it all.</p>
-        <ul class="spec-services-list">
-          <li class="spec-service-item">Microsoft 365 Business — licensing, deployment &amp; governance</li>
-          <li class="spec-service-item">Microsoft Intune — device enrolment, MDM &amp; policy management</li>
-          <li class="spec-service-item">Microsoft Teams &amp; Teams Calling — UCaaS migration</li>
-          <li class="spec-service-item">Azure Cloud — migration, hybrid, infrastructure &amp; DevOps</li>
-          <li class="spec-service-item">Dynamics 365 — CRM/ERP implementation &amp; customisation</li>
-          <li class="spec-service-item">Power Platform — Power Apps, Power BI, Power Virtual Agents</li>
-          <li class="spec-service-item">Microsoft Sentinel — cloud-native SIEM &amp; security operations</li>
-        </ul>
-        <a href="#contact" class="btn btn-primary" style="margin-top:28px;">Speak to a Microsoft Expert →</a>
+    <div class="ms-products-inner">
+      <div class="ms-products-label">
+        <span class="label">Microsoft Specialisation</span>
+        <p>Certified across the full Microsoft stack — from M365 to Azure to Dynamics 365.</p>
       </div>
-      <div class="spec-panel-right">
-        <h4>Business outcomes</h4>
-        <div class="benefit-list">
-          <div class="benefit-item">
-            <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
-            <p><strong>Reduce tool sprawl</strong>One platform. One vendor. One partner. Lower licensing cost and complexity.</p>
-          </div>
-          <div class="benefit-item">
-            <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
-            <p><strong>Enable hybrid work</strong>Secure remote access, collaborative tools and managed endpoints — everywhere your team works.</p>
-          </div>
-          <div class="benefit-item">
-            <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
-            <p><strong>Certified engineers</strong>Every 909 IT Microsoft engagement is delivered by certified professionals, not generalists.</p>
-          </div>
-          <div class="benefit-item">
-            <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
-            <p><strong>Licensing optimisation</strong>We audit your Microsoft licensing to eliminate waste and right-size your spend.</p>
-          </div>
+      <div class="ms-product-logos">
+        <div class="ms-product">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft 365">
+          <span>Microsoft 365</span>
+        </div>
+        <div class="ms-product">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg" alt="Azure">
+          <span>Azure</span>
+        </div>
+        <div class="ms-product">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI">
+          <span>Power BI</span>
+        </div>
+        <div class="ms-product">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/TEAMS_A.svg" alt="Teams" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg'">
+          <span>Teams</span>
+        </div>
+        <div class="ms-product">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Microsoft_Dynamics_365_logo.svg" alt="Dynamics 365" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg'">
+          <span>Dynamics 365</span>
+        </div>
+        <div class="ms-product">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/PowerApps_black.svg" alt="Power Apps" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg'">
+          <span>Power Apps</span>
+        </div>
+        <div class="ms-product">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Microsoft_Intune_logo_2021.svg" alt="Intune" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg'">
+          <span>Intune</span>
+        </div>
+        <div class="ms-product">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Copilot">
+          <span>Copilot</span>
         </div>
       </div>
     </div>
-
-    <!-- Panel 1: AI Automation -->
-    <div class="spec-panel" id="panel-1">
-      <div class="spec-panel-left">
-        <h3>Intelligent Automation for Real Work</h3>
-        <p>AI automation isn't a buzzword at 909 IT — it's a delivery practice. We build practical, integrated automation using Microsoft's AI tooling and our own QuickRPA platform to eliminate manual effort from your operations.</p>
-        <ul class="spec-services-list">
-          <li class="spec-service-item">Power Automate — approval flows, data sync &amp; business process automation</li>
-          <li class="spec-service-item">QuickRPA — rapid robotic process automation for repetitive tasks</li>
-          <li class="spec-service-item">Microsoft Copilot integration — M365 Copilot deployment &amp; enablement</li>
-          <li class="spec-service-item">Power Virtual Agents — intelligent chatbots for internal &amp; customer use</li>
-          <li class="spec-service-item">AI workflow consulting — identifying and prioritising automation opportunities</li>
-        </ul>
-        <a href="#contact" class="btn btn-primary" style="margin-top:28px;">Explore AI Automation →</a>
-      </div>
-      <div class="spec-panel-right">
-        <h4>Business outcomes</h4>
-        <div class="benefit-list">
-          <div class="benefit-item">
-            <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
-            <p><strong>Recover staff time</strong>Automate repetitive approvals, data entry and reporting — freeing your team for higher-value work.</p>
-          </div>
-          <div class="benefit-item">
-            <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
-            <p><strong>Reduce errors</strong>Automated processes are consistent. Human-run processes aren't. The difference shows in your data quality.</p>
-          </div>
-          <div class="benefit-item">
-            <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
-            <p><strong>Fast ROI</strong>QuickRPA bots can be deployed in days, not months. We build for speed to value.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Panel 2: FortiGate -->
-    <div class="spec-panel" id="panel-2">
-      <div class="spec-panel-left">
-        <h3>Enterprise-Grade Fortinet Security</h3>
-        <p>909 IT is a specialist Fortinet partner with certified engineers who deploy, configure and manage FortiGate firewalls and Fortinet's broader security fabric — protecting networks of all sizes across Australia.</p>
-        <ul class="spec-services-list">
-          <li class="spec-service-item">FortiGate firewall deployment &amp; lifecycle management</li>
-          <li class="spec-service-item">Fortinet Secure SD-WAN — branch connectivity &amp; performance</li>
-          <li class="spec-service-item">Network security assessments &amp; policy reviews</li>
-          <li class="spec-service-item">Managed FortiGate — monitoring, patching &amp; incident response</li>
-          <li class="spec-service-item">Zero Trust Network Access (ZTNA) implementation</li>
-          <li class="spec-service-item">Firewall migration from legacy vendors</li>
-        </ul>
-        <a href="#contact" class="btn btn-primary" style="margin-top:28px;">Get a Security Assessment →</a>
-      </div>
-      <div class="spec-panel-right">
-        <h4>Business outcomes</h4>
-        <div class="benefit-list">
-          <div class="benefit-item">
-            <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
-            <p><strong>Enterprise firewall, SMB price</strong>FortiGate delivers enterprise-grade protection at a cost that works for Australian mid-market businesses.</p>
-          </div>
-          <div class="benefit-item">
-            <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
-            <p><strong>Simplified branch networking</strong>Fortinet SD-WAN replaces expensive MPLS while improving performance and visibility across sites.</p>
-          </div>
-          <div class="benefit-item">
-            <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
-            <p><strong>Continuous protection</strong>Managed FortiGate means your firewall stays current — policies, firmware and threat intelligence updated automatically.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </div>
-</section>
+</div>
+
+<!-- ─── STATS ─── -->
+<div class="stats-strip">
+  <div class="container">
+    <div class="stats-row">
+      <div class="stat-block"><div class="stat-num">99.9%</div><div class="stat-desc">Uptime SLA across managed infrastructure</div></div>
+      <div class="stat-block" style="text-align:center;"><div class="stat-num">&lt;2hr</div><div class="stat-desc">P1 incident response time</div></div>
+      <div class="stat-block" style="text-align:center;"><div class="stat-num">200+</div><div class="stat-desc">Businesses supported Australia-wide</div></div>
+      <div class="stat-block" style="text-align:center;"><div class="stat-num">10+</div><div class="stat-desc">Years of certified IT delivery</div></div>
+    </div>
+  </div>
+</div>
 
 <!-- ─── WHY US ─── -->
-<section class="section why" id="why-us">
+<section class="section" style="background:var(--bg-2);">
   <div class="container">
     <div class="why-grid">
       <div class="why-left">
         <p class="label">Why 909 IT</p>
         <h2>A partner that grows alongside you</h2>
-        <p>We're not a helpdesk vendor — we're a strategic technology partner. Since day one, our model has been to understand our clients deeply and build long-term capability, not just fix tickets.</p>
-        <a href="#contact" class="btn btn-primary">Book a Free Consultation →</a>
-        <div class="pillars" style="margin-top:36px;">
-          <div class="pillar">
+        <p>We're not a helpdesk vendor — we're a strategic technology partner. Our model has always been to understand our clients deeply and build long-term capability.</p>
+        <a href="contact-us.html" class="btn btn-primary">Book a Free Consultation →</a>
+        <div class="pillars">
+          <div class="pillar reveal">
             <span class="pillar-num">01</span>
             <div>
               <h4>Certified, not certified-on-paper</h4>
-              <p>Our engineers hold active certifications in Azure, Microsoft 365, and Fortinet — maintained, not just earned once.</p>
+              <p>Active Azure, M365, and Fortinet certifications — maintained, not just earned once.</p>
             </div>
           </div>
-          <div class="pillar">
+          <div class="pillar reveal">
             <span class="pillar-num">02</span>
             <div>
               <h4>Local team, national reach</h4>
-              <p>Based in Parramatta and Canberra, we deliver across Australia — on-site where it matters, remote where it's smarter.</p>
+              <p>Parramatta and Canberra offices — on-site where it matters, remote where it's smarter.</p>
             </div>
           </div>
-          <div class="pillar">
+          <div class="pillar reveal">
             <span class="pillar-num">03</span>
             <div>
               <h4>Outcomes over activity</h4>
-              <p>We measure success by your business impact — not ticket volume or hours logged. Our SLAs reflect that.</p>
+              <p>We measure success by your business impact — not ticket volume or hours logged.</p>
             </div>
           </div>
         </div>
       </div>
-      <div class="why-right">
-        <div class="stats-grid">
-          <div class="stat-item">
-            <div class="stat-num">99.9%</div>
-            <div class="stat-desc">Uptime SLA across managed infrastructure clients</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">&lt;2hr</div>
-            <div class="stat-desc">Average initial response for Priority 1 incidents</div>
-          </div>
+      <div class="why-panel reveal">
+        <div class="stats-grid-2">
+          <div class="stat-box"><div class="stat-num">99.9%</div><div class="stat-desc">Uptime SLA across managed clients</div></div>
+          <div class="stat-box"><div class="stat-num">&lt;2hr</div><div class="stat-desc">Average P1 incident response</div></div>
           <div class="stat-divider"></div>
-          <div class="stat-item">
-            <div class="stat-num">200+</div>
-            <div class="stat-desc">Businesses across Sydney, Canberra and beyond</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-num">7</div>
-            <div class="stat-desc">Technology partner certifications held by our team</div>
-          </div>
+          <div class="stat-box"><div class="stat-num">200+</div><div class="stat-desc">Businesses across Australia</div></div>
+          <div class="stat-box"><div class="stat-num">7</div><div class="stat-desc">Technology partner certifications</div></div>
         </div>
         <div class="why-quote">
           <p>"We grow alongside our clients by understanding their needs and requirements — not by locking them into a box."</p>
@@ -1144,7 +685,7 @@
 </section>
 
 <!-- ─── CTA ─── -->
-<section class="cta-band" id="contact">
+<section class="cta-band">
   <div class="container">
     <div class="cta-inner">
       <div>
@@ -1153,99 +694,12 @@
       </div>
       <div class="cta-actions">
         <a href="tel:0291457230" class="btn btn-white">02 9145 7230</a>
-        <a href="mailto:hello@909it.com.au" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,0.4);">hello@909it.com.au</a>
+        <a href="contact-us.html" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,0.4);">Get in Touch</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── FOOTER ─── -->
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="#" class="nav-logo" style="color:#fff;">909<span>IT</span></a>
-        <p>Certified Microsoft, AI Automation and Fortinet specialists — helping Australian businesses simplify IT complexity and build for the future.</p>
-        <div class="footer-contact">
-          <a href="tel:0291457230">02 9145 7230</a>
-          <a href="mailto:hello@909it.com.au">hello@909it.com.au</a>
-          <a href="#">Unit 2 GF 5-7 Parkes St, Parramatta NSW 2150</a>
-        </div>
-      </div>
-
-      <div class="footer-col">
-        <h5>Services</h5>
-        <ul>
-          <li><a href="#">Managed IT Services</a></li>
-          <li><a href="#">Microsoft 365</a></li>
-          <li><a href="#">Azure Cloud</a></li>
-          <li><a href="#">AI Automation</a></li>
-          <li><a href="#">Cyber Security</a></li>
-          <li><a href="#">Medical IT</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h5>Specialisations</h5>
-        <ul>
-          <li><a href="#">Microsoft Stack</a></li>
-          <li><a href="#">FortiGate Firewall</a></li>
-          <li><a href="#">AI &amp; RPA</a></li>
-          <li><a href="#">Power Platform</a></li>
-          <li><a href="#">Dynamics 365</a></li>
-          <li><a href="#">Azure DevOps</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h5>Company</h5>
-        <ul>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Our Team</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Contact Us</a></li>
-          <li><a href="#">QuickRPA</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <p>© 2025 909 IT Solutions Pty Ltd. All rights reserved. ABN: [Your ABN]</p>
-      <div class="footer-badges">
-        <span class="footer-badge">Microsoft Partner</span>
-        <span class="footer-badge">Fortinet Partner</span>
-        <span class="footer-badge">Sydney & Canberra</span>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<script>
-  function switchTab(index) {
-    document.querySelectorAll('.spec-tab').forEach((t, i) => {
-      t.classList.toggle('active', i === index);
-    });
-    document.querySelectorAll('.spec-panel').forEach((p, i) => {
-      p.classList.toggle('active', i === index);
-    });
-  }
-
-  // Scroll-triggered fade-in for service tiles
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.service-tile').forEach((tile, i) => {
-    tile.style.opacity = '0';
-    tile.style.transform = 'translateY(16px)';
-    tile.style.transition = `opacity 0.4s ease ${i * 0.05}s, transform 0.4s ease ${i * 0.05}s`;
-    observer.observe(tile);
-  });
-</script>
+<script src="assets/nav.js"></script>
 </body>
 </html>

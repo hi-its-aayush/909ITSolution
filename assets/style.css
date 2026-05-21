@@ -211,18 +211,59 @@ ul { list-style: none; }
 /* ─── PAGE HERO (inner pages) ─── */
 .page-hero {
   background: var(--navy);
-  padding: 72px 0 64px;
+  padding: 80px 0 72px;
   position: relative;
   overflow: hidden;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
 }
-.page-hero::before {
-  content: '';
+.page-hero-bg {
   position: absolute;
-  top: 0; right: 0;
-  width: 40%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(0,120,212,0.1) 0%, transparent 100%);
-  border-left: 1px solid rgba(0,120,212,0.12);
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.22;
+}
+.page-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(11,30,53,0.97) 45%, rgba(11,30,53,0.6) 100%);
+}
+.page-hero .container { position: relative; z-index: 2; width: 100%; }
+.page-hero-vendor {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 18px;
+}
+.page-hero-vendor img {
+  height: 22px; width: auto;
+  filter: brightness(0) invert(1); opacity: 0.8;
+}
+.page-hero-vendor span {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(255,255,255,0.45);
+}
+.content-image-section { overflow: hidden; }
+.content-image-grid { display: grid; grid-template-columns: 1fr 1fr; }
+.content-image-text {
+  padding: 72px; display: flex; flex-direction: column; justify-content: center;
+  background: var(--bg-2);
+}
+.content-image-text h2 { font-size: 32px; letter-spacing: -0.02em; margin: 12px 0 16px; }
+.content-image-text p  { color: var(--fg-2); font-size: 15px; line-height: 1.8; margin-bottom: 14px; }
+.content-image-photo {
+  position: relative; min-height: 420px; overflow: hidden;
+}
+.content-image-photo img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+}
+.content-image-photo-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(0,120,212,0.1), transparent 60%);
+}
+@media (max-width: 860px) {
+  .content-image-grid { grid-template-columns: 1fr; }
+  .content-image-photo { min-height: 280px; }
+  .content-image-text { padding: 40px 28px; }
 }
 .page-hero-eyebrow {
   font-family: 'Outfit', sans-serif;

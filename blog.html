@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — 909 IT Solutions</title>
+<meta name="description" content="IT insights, Microsoft tips, cyber security advice, and technology news from the team at 909 IT Solutions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .blog-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .blog-featured {
+    background: var(--navy);
+    border-radius: var(--radius-lg);
+    padding: 48px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .blog-featured::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 40%; height: 100%;
+    background: linear-gradient(135deg, rgba(0,120,212,0.15), transparent);
+    border-left: 1px solid rgba(0,120,212,0.15);
+  }
+  .blog-featured-tag { font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 16px; }
+  .blog-featured h2 { font-size: 28px; color: #fff; margin-bottom: 14px; letter-spacing: -0.01em; line-height: 1.25; }
+  .blog-featured p  { font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 24px; max-width: 520px; }
+  .blog-meta { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 20px; display: flex; gap: 16px; }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .blog-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: border-color 0.18s, box-shadow 0.18s;
+    cursor: pointer;
+  }
+  .blog-card:hover { border-color: var(--blue); box-shadow: 0 4px 20px rgba(0,120,212,0.08); }
+
+  .blog-card-img {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Outfit', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.9);
+  }
+  .bg-blue  { background: var(--blue); }
+  .bg-navy  { background: var(--navy); }
+  .bg-green { background: var(--green); }
+  .bg-red   { background: var(--red); }
+
+  .blog-card-body { padding: 22px; }
+  .blog-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--blue);
+    background: var(--blue-pale);
+    padding: 3px 9px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .blog-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; line-height: 1.35; }
+  .blog-card p  { font-size: 13px; color: var(--fg-2); line-height: 1.6; }
+  .blog-card-meta { font-size: 12px; color: var(--fg-3); margin-top: 14px; display: flex; justify-content: space-between; }
+  .blog-read-link { font-size: 13px; color: var(--blue); font-weight: 500; display: flex; align-items: center; gap: 4px; margin-top: 12px; font-family: 'Outfit', sans-serif; }
+
+  /* Sidebar */
+  .blog-sidebar { display: flex; flex-direction: column; gap: 24px; }
+  .sidebar-widget {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+  }
+  .sidebar-widget h4 { font-size: 14px; font-weight: 600; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .category-list { display: flex; flex-direction: column; gap: 0; }
+  .category-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--fg-2);
+    cursor: pointer;
+    transition: color 0.15s;
+  }
+  .category-item:last-child { border-bottom: none; }
+  .category-item:hover { color: var(--blue); }
+  .cat-count { font-size: 12px; background: var(--bg-3); padding: 2px 8px; border-radius: 20px; color: var(--fg-3); }
+
+  .recent-posts { display: flex; flex-direction: column; gap: 14px; }
+  .recent-post { display: flex; gap: 12px; align-items: flex-start; }
+  .recent-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); margin-top: 7px; flex-shrink: 0; }
+  .recent-post-title { font-size: 13px; font-weight: 500; color: var(--fg); line-height: 1.4; cursor: pointer; transition: color 0.15s; }
+  .recent-post-title:hover { color: var(--blue); }
+  .recent-post-date { font-size: 11px; color: var(--fg-3); margin-top: 2px; }
+
+  .newsletter-form { display: flex; flex-direction: column; gap: 10px; }
+  .newsletter-form input { padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 14px; font-family: 'DM Sans', sans-serif; outline: none; }
+  .newsletter-form input:focus { border-color: var(--blue); }
+  .newsletter-form button { padding: 10px; background: var(--blue); color: #fff; border: none; border-radius: var(--radius); font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; }
+  .newsletter-form button:hover { background: var(--blue-dark); }
+
+  @media (max-width: 860px) {
+    .blog-layout { grid-template-columns: 1fr; }
+    .blog-grid   { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body data-depth="0">
+
+<!-- ─── HERO ─── -->
+<section class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1400&q=80&fit=crop');"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="container">
+    <p class="page-hero-eyebrow">Insights &amp; Resources</p>
+    <h1>IT Blog &amp; News</h1>
+    <p>Practical IT insights, Microsoft tips, cyber security advice, and technology updates from the 909 IT team.</p>
+  </div>
+</section>
+
+<!-- ─── BREADCRUMB ─── -->
+<div class="breadcrumb">
+  <div class="container">
+    <div class="breadcrumb-inner">
+      <a href="index.html">Home</a>
+      <span class="breadcrumb-sep">›</span>
+      <span>Blog</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── BLOG MAIN ─── -->
+<section class="section">
+  <div class="container">
+    <div class="blog-layout">
+
+      <!-- MAIN CONTENT -->
+      <div>
+
+        <!-- Featured Post -->
+        <div class="blog-featured reveal">
+          <div class="blog-featured-tag">Featured · Cyber Security</div>
+          <h2>Keep Your System Away From Ransomware</h2>
+          <p>Ransomware attacks are on the rise across Australian businesses. Here is what you need to know — and what to do right now to protect your organisation before it becomes a target.</p>
+          <a href="contact-us.html" class="btn btn-primary">Read Article →</a>
+          <div class="blog-meta"><span>909 IT Team</span><span>·</span><span>November 2024</span><span>·</span><span>5 min read</span></div>
+        </div>
+
+        <!-- Blog Grid -->
+        <div class="blog-grid">
+
+          <div class="blog-card reveal">
+            <div class="blog-card-img bg-blue">M365</div>
+            <div class="blog-card-body">
+              <span class="blog-tag">Microsoft Office 365</span>
+              <h3>How To: Share Calendars In Outlook</h3>
+              <p>A step-by-step guide to sharing calendars in Microsoft Outlook — for individuals and whole teams.</p>
+              <div class="blog-card-meta"><span>909 IT Team</span><span>5 min read</span></div>
+              <div class="blog-read-link">Read More →</div>
+            </div>
+          </div>
+
+          <div class="blog-card reveal">
+            <div class="blog-card-img bg-red">🔒</div>
+            <div class="blog-card-body">
+              <span class="blog-tag">Cyber Security</span>
+              <h3>5 Signs Your Business Email Has Been Compromised</h3>
+              <p>Business Email Compromise is one of the most costly attack vectors. Learn the warning signs before it is too late.</p>
+              <div class="blog-card-meta"><span>909 IT Team</span><span>6 min read</span></div>
+              <div class="blog-read-link">Read More →</div>
+            </div>
+          </div>
+
+          <div class="blog-card reveal">
+            <div class="blog-card-img bg-navy">AI</div>
+            <div class="blog-card-body">
+              <span class="blog-tag">AI &amp; Automation</span>
+              <h3>Is Microsoft Copilot Worth It for Australian SMBs?</h3>
+              <p>An honest look at Microsoft Copilot — what it does well, where it falls short, and whether the licence cost is justified for your business.</p>
+              <div class="blog-card-meta"><span>909 IT Team</span><span>7 min read</span></div>
+              <div class="blog-read-link">Read More →</div>
+            </div>
+          </div>
+
+          <div class="blog-card reveal">
+            <div class="blog-card-img bg-green">☁️</div>
+            <div class="blog-card-body">
+              <span class="blog-tag">Azure Cloud</span>
+              <h3>On-Premises vs Azure: What Makes Sense in 2025</h3>
+              <p>Not every workload belongs in the cloud. A practical framework for deciding what to migrate and what to keep on-premises.</p>
+              <div class="blog-card-meta"><span>909 IT Team</span><span>8 min read</span></div>
+              <div class="blog-read-link">Read More →</div>
+            </div>
+          </div>
+
+          <div class="blog-card reveal">
+            <div class="blog-card-img bg-blue">🛡️</div>
+            <div class="blog-card-body">
+              <span class="blog-tag">Fortinet</span>
+              <h3>FortiGate vs Cisco ASA: A Straight Comparison</h3>
+              <p>Both are enterprise firewall platforms. Here is how they compare on features, management, and total cost of ownership for mid-market businesses.</p>
+              <div class="blog-card-meta"><span>909 IT Team</span><span>6 min read</span></div>
+              <div class="blog-read-link">Read More →</div>
+            </div>
+          </div>
+
+          <div class="blog-card reveal">
+            <div class="blog-card-img bg-navy">📋</div>
+            <div class="blog-card-body">
+              <span class="blog-tag">Managed IT</span>
+              <h3>What to Look for in a Managed Service Provider</h3>
+              <p>Not all MSPs are equal. Here are the questions to ask — and the red flags to watch for — before signing a managed IT contract.</p>
+              <div class="blog-card-meta"><span>909 IT Team</span><span>5 min read</span></div>
+              <div class="blog-read-link">Read More →</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="blog-sidebar">
+
+        <div class="sidebar-widget reveal">
+          <h4>Categories</h4>
+          <div class="category-list">
+            <div class="category-item">Cyber Security <span class="cat-count">8</span></div>
+            <div class="category-item">Microsoft Office 365 <span class="cat-count">12</span></div>
+            <div class="category-item">Azure Cloud <span class="cat-count">6</span></div>
+            <div class="category-item">AI &amp; Automation <span class="cat-count">4</span></div>
+            <div class="category-item">Managed IT <span class="cat-count">9</span></div>
+            <div class="category-item">Fortinet <span class="cat-count">3</span></div>
+            <div class="category-item">Healthcare IT <span class="cat-count">5</span></div>
+          </div>
+        </div>
+
+        <div class="sidebar-widget reveal">
+          <h4>Recent Posts</h4>
+          <div class="recent-posts">
+            <div class="recent-post">
+              <div class="recent-dot"></div>
+              <div>
+                <div class="recent-post-title">Keep Your System Away From Ransomware</div>
+                <div class="recent-post-date">November 2024</div>
+              </div>
+            </div>
+            <div class="recent-post">
+              <div class="recent-dot"></div>
+              <div>
+                <div class="recent-post-title">How To: Share Calendars In Outlook</div>
+                <div class="recent-post-date">October 2024</div>
+              </div>
+            </div>
+            <div class="recent-post">
+              <div class="recent-dot"></div>
+              <div>
+                <div class="recent-post-title">Is Microsoft Copilot Worth It for SMBs?</div>
+                <div class="recent-post-date">September 2024</div>
+              </div>
+            </div>
+            <div class="recent-post">
+              <div class="recent-dot"></div>
+              <div>
+                <div class="recent-post-title">FortiGate vs Cisco ASA Comparison</div>
+                <div class="recent-post-date">August 2024</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-widget reveal">
+          <h4>Get IT Insights</h4>
+          <p style="font-size:13px; color:var(--fg-2); margin-bottom:14px; line-height:1.6;">Monthly IT tips and security updates — straight to your inbox. No spam.</p>
+          <div class="newsletter-form">
+            <input type="email" placeholder="your@email.com.au">
+            <button type="button">Subscribe →</button>
+          </div>
+        </div>
+
+        <div class="sidebar-widget" style="background:var(--navy); border-color:var(--navy);">
+          <h4 style="color:#fff;">Free IT Assessment</h4>
+          <p style="font-size:13px; color:rgba(255,255,255,0.55); margin-bottom:16px; line-height:1.6;">Not sure where your IT gaps are? We offer a free assessment for new clients.</p>
+          <a href="contact-us.html" class="btn btn-primary" style="width:100%; justify-content:center;">Book Free Assessment</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="assets/nav.js"></script>
+</body>
+</html>
