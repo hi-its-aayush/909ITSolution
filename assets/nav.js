@@ -89,23 +89,16 @@
           </div>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" tabindex="0">Cyber Security<svg class="nav-caret" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></a>
-          <div class="nav-dropdown nav-dropdown-sm">
-            <ul>
-              <li><a href="${root}cyber-security/index.html">Cyber Security Overview</a></li>
-              <li><a href="${root}cyber-security/cloud-security.html">Cloud Security</a></li>
-              <li><a href="${root}cyber-security/network-security.html">Network Security</a></li>
-              <li><a href="${root}cyber-security/endpoint-security.html">Endpoint Security</a></li>
-              <li><a href="${root}cyber-security/it-cyber-security-risk-assessment.html">IT Cyber Security &amp; Risk Assessment</a></li>
-            </ul>
-          </div>
-        </li>
-
         <li class="nav-item"><a href="${root}quickrpa.html" class="nav-link">QuickRPA</a></li>
         <li class="nav-item"><a href="${root}blog.html" class="nav-link">Blog</a></li>
         <li class="nav-item"><a href="${root}contact-us.html" class="nav-link">Contact Us</a></li>
       </ul>
+
+      <button class="hamburger-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
 
       <div class="nav-actions">
         <a href="https://www.909itacademy.com.au/" target="_blank" rel="noopener" class="nav-academy-link">
@@ -188,6 +181,37 @@
   document.body.insertAdjacentHTML('afterbegin', nav);
   document.body.insertAdjacentHTML('beforeend', footer);
 
+  // Favicon
+  const head = document.head;
+  const favicon = document.createElement('link');
+  favicon.rel = 'icon';
+  favicon.type = 'image/svg+xml';
+  favicon.href = root + 'favicon.svg';
+  head.appendChild(favicon);
+
+  // Open Graph & Twitter meta tags
+  const pageTitle = document.title || '909 IT Solutions';
+  const metaDesc = document.querySelector('meta[name="description"]');
+  const description = metaDesc ? metaDesc.content : '';
+  const ogTags = [
+    { property: 'og:type', content: 'website' },
+    { property: 'og:site_name', content: '909 IT Solutions' },
+    { property: 'og:title', content: pageTitle },
+    { property: 'og:description', content: description },
+    { property: 'og:image', content: 'https://909it.com.au/og-image.png' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: pageTitle },
+    { name: 'twitter:description', content: description },
+    { name: 'twitter:image', content: 'https://909it.com.au/og-image.png' }
+  ];
+  ogTags.forEach(tag => {
+    const meta = document.createElement('meta');
+    if (tag.property) meta.setAttribute('property', tag.property);
+    if (tag.name) meta.setAttribute('name', tag.name);
+    meta.content = tag.content;
+    head.appendChild(meta);
+  });
+
   // Scroll reveal
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -195,4 +219,58 @@
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Mobile hamburger menu
+  const hamburgerBtn = document.querySelector('.hamburger-btn');
+  const navLinks = document.querySelector('.nav-links');
+  const siteNav = document.querySelector('#site-nav');
+
+  if (hamburgerBtn && navLinks) {
+    // Create overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'mobile-overlay';
+    document.body.appendChild(overlay);
+
+    function toggleMenu() {
+      const isOpen = navLinks.classList.toggle('mobile-open');
+      hamburgerBtn.classList.toggle('active', isOpen);
+      hamburgerBtn.setAttribute('aria-expanded', isOpen);
+      overlay.classList.toggle('active', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
+    hamburgerBtn.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && navLinks.classList.contains('mobile-open')) {
+        toggleMenu();
+      }
+    });
+
+    // Mobile dropdown toggles
+    navLinks.querySelectorAll('.nav-item').forEach(item => {
+      const dropdown = item.querySelector('.nav-dropdown, .nav-dropdown-sm');
+      const link = item.querySelector('.nav-link');
+      if (dropdown && link) {
+        link.addEventListener('click', e => {
+          if (window.innerWidth <= 860) {
+            e.preventDefault();
+            // Close other open items
+            navLinks.querySelectorAll('.nav-item.mobile-dropdown-open').forEach(other => {
+              if (other !== item) other.classList.remove('mobile-dropdown-open');
+            });
+            item.classList.toggle('mobile-dropdown-open');
+          }
+        });
+      }
+    });
+
+    // Close menu on window resize past mobile breakpoint
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 860 && navLinks.classList.contains('mobile-open')) {
+        toggleMenu();
+      }
+    });
+  }
 })();

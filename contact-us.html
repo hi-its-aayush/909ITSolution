@@ -9,127 +9,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
-<style>
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 64px;
-    align-items: start;
-  }
-
-  /* Contact Info */
-  .contact-info h2 { font-size: 36px; letter-spacing: -0.02em; margin-top: 14px; margin-bottom: 16px; }
-  .contact-info p  { color: var(--fg-2); margin-bottom: 32px; }
-
-  .contact-methods { display: flex; flex-direction: column; gap: 0; }
-  .contact-method {
-    display: flex;
-    gap: 18px;
-    padding: 22px 0;
-    border-bottom: 1px solid var(--border);
-    align-items: flex-start;
-  }
-  .contact-method:first-child { padding-top: 0; }
-  .contact-method-icon {
-    width: 44px; height: 44px;
-    border-radius: var(--radius);
-    background: var(--blue-pale);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-  .contact-method-icon svg { width: 22px; height: 22px; stroke: var(--blue); stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-  .contact-method-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 4px; font-family: 'Outfit', sans-serif; }
-  .contact-method-value { font-size: 16px; font-weight: 500; color: var(--navy); }
-  .contact-method-value a { color: var(--navy); transition: color 0.15s; }
-  .contact-method-value a:hover { color: var(--blue); }
-  .contact-method-sub { font-size: 13px; color: var(--fg-3); margin-top: 2px; }
-
-  .office-cards { display: flex; flex-direction: column; gap: 14px; margin-top: 32px; }
-  .office-mini {
-    background: var(--bg-2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 20px 22px;
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-  }
-  .office-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--blue); margin-top: 5px; flex-shrink: 0; }
-  .office-mini h5 { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
-  .office-mini p  { font-size: 13px; color: var(--fg-2); line-height: 1.6; }
-
-  /* Form */
-  .contact-form-wrap {
-    background: var(--bg-2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 40px;
-  }
-  .form-header { margin-bottom: 28px; }
-  .form-header h3 { font-size: 22px; margin-bottom: 6px; }
-  .form-header p  { font-size: 14px; color: var(--fg-2); }
-
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
-  .form-group label { font-size: 13px; font-weight: 600; color: var(--fg); font-family: 'Outfit', sans-serif; }
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    padding: 11px 14px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    color: var(--fg);
-    background: var(--bg);
-    transition: border-color 0.15s, box-shadow 0.15s;
-    outline: none;
-    width: 100%;
-  }
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    border-color: var(--blue);
-    box-shadow: 0 0 0 3px rgba(0,120,212,0.12);
-  }
-  .form-group textarea { resize: vertical; min-height: 120px; }
-  .form-group select { appearance: none; cursor: pointer; }
-  .form-required { color: var(--blue); }
-
-  .form-submit {
-    width: 100%;
-    justify-content: center;
-    padding: 15px;
-    font-size: 15px;
-    margin-top: 4px;
-  }
-  .form-note { font-size: 12px; color: var(--fg-3); text-align: center; margin-top: 12px; }
-
-  .hours-box {
-    background: var(--navy);
-    border-radius: var(--radius-lg);
-    padding: 28px;
-    margin-top: 24px;
-  }
-  .hours-box h4 { font-size: 15px; color: #fff; margin-bottom: 14px; }
-  .hours-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 13px; }
-  .hours-row:last-child { border-bottom: none; }
-  .hours-row .day   { color: rgba(255,255,255,0.55); }
-  .hours-row .time  { color: #fff; font-weight: 500; }
-  .hours-row .open  { color: #4CAF50; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
-
-  @media (max-width: 860px) {
-    .contact-grid { grid-template-columns: 1fr; }
-    .form-row { grid-template-columns: 1fr; }
-  }
-</style>
 </head>
 <body data-depth="0">
 
 <!-- ─── HERO ─── -->
 <section class="page-hero">
-  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1400&q=80&fit=crop');"></div>
+  <div class="page-hero-bg" style="background-image:url('images/hero-contact.jpg');"></div>
   <div class="page-hero-overlay"></div>
   <div class="container">
     <p class="page-hero-eyebrow">Get in Touch</p>
@@ -225,7 +110,9 @@
           <h3>Send Us an Enquiry</h3>
           <p>Fill in the form and one of our engineers will get back to you — usually within a few hours.</p>
         </div>
-        <form action="#" method="POST">
+        <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <input type="hidden" name="_subject" value="New enquiry from 909IT website">
+          <input type="hidden" name="_next" value="https://909it.com.au/contact-us.html?submitted=true">
           <div class="form-row">
             <div class="form-group">
               <label for="fname">First Name <span class="form-required">*</span></label>
@@ -238,7 +125,7 @@
           </div>
           <div class="form-group">
             <label for="email">Work Email <span class="form-required">*</span></label>
-            <input type="email" id="email" name="email" placeholder="john@yourcompany.com.au" required>
+            <input type="email" id="email" name="_replyto" placeholder="john@yourcompany.com.au" required>
           </div>
           <div class="form-group">
             <label for="phone">Phone Number</label>
@@ -269,9 +156,21 @@
             <label for="message">Tell us about your environment <span class="form-required">*</span></label>
             <textarea id="message" name="message" placeholder="E.g. We have 50 users on Office 365, looking to migrate to Azure and improve security posture..." required></textarea>
           </div>
-          <button type="submit" class="btn btn-primary form-submit">Send Enquiry →</button>
+          <button type="submit" id="form-submit-btn" class="btn btn-primary form-submit">Send Enquiry →</button>
           <p class="form-note">We'll never share your details. Usually respond within 4 business hours.</p>
         </form>
+        <!-- Success message (hidden by default) -->
+        <div id="form-success" style="display:none;text-align:center;padding:48px 24px;">
+          <div style="width:64px;height:64px;border-radius:50%;background:#e8f5e9;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <h3 style="font-size:24px;margin-bottom:8px;color:var(--navy);">Thank you!</h3>
+          <p style="color:var(--fg-2);font-size:15px;max-width:400px;margin:0 auto;">Your enquiry has been received. One of our engineers will get back to you — usually within a few hours.</p>
+        </div>
+        <!-- Error message (hidden by default) -->
+        <div id="form-error" style="display:none;background:#fff5f5;border:1px solid #e31b23;border-radius:var(--radius-lg);padding:16px 20px;margin-top:16px;">
+          <p style="color:#e31b23;font-size:14px;font-weight:500;margin:0;">Something went wrong. Please try again or email us directly at <a href="mailto:hello@909it.com.au" style="color:#e31b23;text-decoration:underline;">hello@909it.com.au</a></p>
+        </div>
       </div>
 
     </div>
@@ -297,5 +196,60 @@
 </div>
 
 <script src="assets/nav.js"></script>
+<script>
+  // Contact form AJAX handler
+  (function() {
+    const form = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('form-submit-btn');
+    const successDiv = document.getElementById('form-success');
+    const errorDiv = document.getElementById('form-error');
+    
+    if (!form) return;
+    
+    // Check if returning from successful submission
+    if (window.location.search.includes('submitted=true')) {
+      form.style.display = 'none';
+      successDiv.style.display = 'block';
+    }
+    
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      // Validate required fields
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      
+      // Loading state
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+      submitBtn.style.opacity = '0.7';
+      errorDiv.style.display = 'none';
+      
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        
+        if (response.ok) {
+          form.style.display = 'none';
+          successDiv.style.display = 'block';
+          successDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          throw new Error('Form submission failed');
+        }
+      } catch (err) {
+        errorDiv.style.display = 'block';
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '1';
+      }
+    });
+  })();
+</script>
 </body>
 </html>
